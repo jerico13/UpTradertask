@@ -1,0 +1,22 @@
+<ul>
+    {% for node in menu_tree %}
+        <li>
+            <a href="{{ node.item.url or reverse(node.item.named_url) }}"
+               class="{% if node.item == active_item %}active{% endif %}">
+                {{ node.item.name }}
+            </a>
+            {% if node.children and node.item == active_item %}
+                <ul>
+                    {% for child in node.children %}
+                        <li>
+                            <a href="{{ child.item.url or reverse(child.item.named_url) }}"
+                               class="{% if child.item == active_item %}active{% endif %}">
+                                {{ child.item.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
